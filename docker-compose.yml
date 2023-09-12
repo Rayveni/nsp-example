@@ -1,0 +1,33 @@
+version: "3.91"
+services:
+  fast_api:
+    build:
+      context: ./
+      dockerfile: ./app/Dockerfile      
+    image: local_image/fast_api       
+    environment:
+      - TZ=${timezone}
+      - app_logs=/app/logs   
+      - log_level=${log_level}          
+    volumes: 
+      - app_code_source:/app/app
+      - logs-store:/app/logs 
+    command: >
+        bash -c "python server.py  "         
+    ports:
+      - "${app_ports}"
+    
+volumes:
+
+  app_code_source: 
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${app_code_source} 
+  logs-store: 
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${logs_dir} 

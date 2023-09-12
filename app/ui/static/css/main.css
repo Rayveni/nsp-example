@@ -1,0 +1,6 @@
+.flashmessage {
+    width: 100%;height: auto;
+    word-wrap: break-word;
+    background-color:antiquewhite;
+    white-space: pre;
+}
